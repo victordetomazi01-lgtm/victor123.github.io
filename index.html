@@ -1,57 +1,1214 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Site</title>
+
+    <meta name="description" content="Sakura Sushi - Restaurante japonês. Sushi, sashimi, temaki e muito mais.">
+    <meta name="theme-color" content="#0b0b0b">
+
+    <title>Sakura Sushi | Restaurante Japonês</title>
 
     <style>
-        body {
+        /* =========================
+           CONFIGURAÇÕES GERAIS
+        ========================== */
+
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #111;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0b0b0b;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            width: 100%;
+            display: block;
+        }
+
+        /* =========================
+           CABEÇALHO
+        ========================== */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 18px 7%;
+
+            background: rgba(5, 5, 5, 0.96);
+            border-bottom: 1px solid #292929;
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 27px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #d92323;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #e32626;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 130px 20px 80px;
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.55),
+                    rgba(0, 0, 0, 0.85)
+                ),
+                url("https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1800&q=85");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .japanese {
+            color: #d92323;
+            font-size: 18px;
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 8vw, 90px);
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #e32626;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #dddddd;
+            font-size: 19px;
+            margin-bottom: 35px;
+        }
+
+        .button {
+            display: inline-block;
+
+            padding: 15px 30px;
+
+            background: #d92323;
+            color: #ffffff;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: #ad1717;
+            transform: translateY(-3px);
+        }
+
+        .button.secondary {
+            background: transparent;
+            border: 1px solid #ffffff;
+            margin-left: 10px;
+        }
+
+        .button.secondary:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        /* =========================
+           SEÇÕES
+        ========================== */
+
+        section {
+            padding: 90px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title small {
+            display: block;
+            color: #d92323;
+            font-size: 14px;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+        }
+
+        .section-title h2 span {
+            color: #d92323;
+        }
+
+        /* =========================
+           CARDÁPIO
+        ========================== */
+
+        #cardapio {
+            background: #101010;
+        }
+
+        .category-title {
+            text-align: center;
+            font-size: 27px;
+            margin: 45px 0 25px;
+            color: #ffffff;
+        }
+
+        .category-title span {
+            color: #d92323;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .food-card {
+            overflow: hidden;
+
+            background: #181818;
+
+            border: 1px solid #292929;
+            border-radius: 14px;
+
+            transition: 0.3s;
+        }
+
+        .food-card:hover {
+            transform: translateY(-7px);
+            border-color: #d92323;
+        }
+
+        .food-image {
+            height: 210px;
+            overflow: hidden;
+        }
+
+        .food-image img {
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .food-card:hover .food-image img {
+            transform: scale(1.08);
+        }
+
+        .food-info {
+            padding: 20px;
+        }
+
+        .food-info h3 {
+            font-size: 21px;
+            margin-bottom: 7px;
+        }
+
+        .food-info p {
+            color: #aaaaaa;
+            font-size: 14px;
+            min-height: 45px;
+        }
+
+        .food-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 18px;
+        }
+
+        .price {
+            color: #e32626;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .order-button {
+            padding: 9px 14px;
+
+            background: #d92323;
             color: white;
+
+            border-radius: 6px;
+
+            font-size: 13px;
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .order-button:hover {
+            background: #ad1717;
+        }
+
+        /* =========================
+           SOBRE
+        ========================== */
+
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            height: 450px;
+            object-fit: cover;
+        }
+
+        .about-text small {
+            color: #d92323;
+            letter-spacing: 3px;
+        }
+
+        .about-text h2 {
+            font-size: 42px;
+            margin: 12px 0 20px;
+        }
+
+        .about-text p {
+            color: #bbbbbb;
+            margin-bottom: 15px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .feature {
+            background: #171717;
+            padding: 17px;
+            border-radius: 8px;
+            border-left: 3px solid #d92323;
+        }
+
+        .feature strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .feature span {
+            color: #999999;
+            font-size: 13px;
+        }
+
+        /* =========================
+           AVALIAÇÕES
+        ========================== */
+
+        #avaliacoes {
+            background: #101010;
+        }
+
+        .reviews {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .review {
+            background: #181818;
+            padding: 28px;
+            border-radius: 12px;
+            border: 1px solid #292929;
+        }
+
+        .stars {
+            color: #f5b800;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .review p {
+            color: #cccccc;
+            margin-bottom: 18px;
+        }
+
+        .review strong {
+            color: #ffffff;
+        }
+
+        /* =========================
+           CONTATO
+        ========================== */
+
+        .contact {
             text-align: center;
         }
 
-        header {
-            padding: 60px 20px;
+        .contact-box {
+            max-width: 850px;
+            margin: auto;
+
+            background: #171717;
+
+            padding: 45px;
+
+            border-radius: 15px;
+            border: 1px solid #292929;
         }
 
-        h1 {
-            font-size: 50px;
+        .contact-box h2 {
+            font-size: 35px;
+            margin-bottom: 15px;
         }
 
-        p {
-            font-size: 20px;
+        .contact-box p {
+            color: #bbbbbb;
+            margin-bottom: 25px;
         }
 
-        button {
-            background: #00c853;
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            padding: 15px;
+        }
+
+        .contact-item strong {
+            display: block;
+            color: #d92323;
+            margin-bottom: 5px;
+        }
+
+        .contact-item span {
+            color: #bbbbbb;
+            font-size: 14px;
+        }
+
+        /* =========================
+           RODAPÉ
+        ========================== */
+
+        footer {
+            background: #050505;
+            padding: 35px 7%;
+            text-align: center;
+            color: #777777;
+            border-top: 1px solid #222222;
+        }
+
+        footer .footer-logo {
             color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 18px;
-            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
 
-        button:hover {
-            background: #00a844;
+        footer .footer-logo span {
+            color: #d92323;
+        }
+
+        /* =========================
+           BOTÃO WHATSAPP FIXO
+        ========================== */
+
+        .whatsapp {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #25D366;
+            color: white;
+
+            border-radius: 50%;
+
+            font-size: 25px;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+
+            z-index: 999;
+
+            transition: 0.3s;
+        }
+
+        .whatsapp:hover {
+            transform: scale(1.1);
+        }
+
+        /* =========================
+           RESPONSIVIDADE
+        ========================== */
+
+        @media (max-width: 800px) {
+
+            header {
+                padding: 15px 5%;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .hero {
+                padding-top: 150px;
+            }
+
+            .button.secondary {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image img {
+                height: 320px;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .logo {
+                font-size: 21px;
+            }
+
+            nav a:nth-child(3),
+            nav a:nth-child(4) {
+                display: none;
+            }
+
+            section {
+                padding: 70px 5%;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+
+            .hero h1 {
+                font-size: 50px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-box {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>Meu Site</h1>
-        <p>Bem-vindo ao meu site!</p>
+    <!-- =========================
+         MENU
+    ========================== -->
 
-        <button onclick="alert('Olá!')">
-            Clique aqui
-        </button>
+    <header>
+
+        <a href="#inicio" class="logo">
+            Sakura<span>Sushi</span>
+        </a>
+
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#cardapio">Cardápio</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#avaliacoes">Avaliações</a>
+            <a href="#contato">Contato</a>
+        </nav>
+
     </header>
+
+
+    <!-- =========================
+         INÍCIO
+    ========================== -->
+
+    <section class="hero" id="inicio">
+
+        <div class="hero-content">
+
+            <div class="japanese">
+                寿司 • 刺身 • 天ぷら
+            </div>
+
+            <h1>
+                Sabor que<br>
+                <span>conquista.</span>
+            </h1>
+
+            <p>
+                Uma experiência japonesa preparada com ingredientes
+                selecionados, cuidado em cada detalhe e muito sabor.
+            </p>
+
+            <a href="#cardapio" class="button">
+                Ver nosso cardápio
+            </a>
+
+            <a href="#contato" class="button secondary">
+                Fazer pedido
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CARDÁPIO
+    ========================== -->
+
+    <section id="cardapio">
+
+        <div class="section-title">
+
+            <small>MENU</small>
+
+            <h2>
+                Nosso <span>Cardápio</span>
+            </h2>
+
+        </div>
+
+
+        <!-- SUSHI -->
+
+        <h3 class="category-title">
+            🍣 <span>Sushi</span>
+        </h3>
+
+        <div class="menu-grid">
+
+            <div class="food-card">
+
+                <div class="food-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=800&q=80"
+                        alt="Sushi variado">
+                </div>
+
+                <div class="food-info">
+
+                    <h3>Combinado Sakura</h3>
+
+                    <p>
+                        Seleção especial de sushis variados.
+                    </p>
+
+                    <div class="food-bottom">
+                        <span class="price">R$ 59,90</span>
+
+                        <a
+                            class="order-button"
+                            href="https://wa.me/5500000000000?text=Olá!%20Quero%20pedir%20o%20Combinado%20Sakura."
+                            target="_blank">
+                            Pedir
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1617196034183-421b4917c92d?auto=format&fit=crop&w=800&q=80"
+                        alt="Sushi salmão">
+                </div>
+
+                <div class="food-info">
+
+                    <h3>Sushi de Salmão</h3>
+
+                    <p>
+                        Arroz japonês, salmão fresco e nori.
+                    </p>
+
+                    <div class="food-bottom">
+                        <span class="price">R$ 34,90</span>
+
+                        <a
+                            class="order-button"
+                            href="https://wa.me/5500000000000?text=Olá!%20Quero%20pedir%20Sushi%20de%20Salmão."
+                            target="_blank">
+                            Pedir
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=800&q=80"
+                        alt="Sushi variado">
+                </div>
+
+                <div class="food-info">
+
+                    <h3>Combo Especial</h3>
+
+                    <p>
+                        Uma combinação especial para compartilhar.
+                    </p>
+
+                    <div class="food-bottom">
+                        <span class="price">R$ 89,90</span>
+
+                        <a
+                            class="order-button"
+                            href="https://wa.me/5500000000000?text=Olá!%20Quero%20pedir%20o%20Combo%20Especial."
+                            target="_blank">
+                            Pedir
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TEMAKI -->
+
+        <h3 class="category-title">
+            🌯 <span>Temaki</span>
+        </h3>
+
+        <div class="menu-grid">
+
+            <div class="food-card">
+
+                <div class="food-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1562158070-622a4d6d9f3d?auto=format&fit=crop&w=800&q=80"
+                        alt="Temaki de salmão">
+                </div>
+
+                <div class="food-info">
+
+                    <h3>Temaki Salmão</h3>
+
+                    <p>
+                        Salmão fresco, arroz japonês e cebolinha.
+                    </p>
+
+                    <div class="food-bottom">
+                        <span class="price">R$ 29,90</span>
+
+                        <a
+                            class="order-button"
+                            href="https://wa.me/5500000000000?text=Olá!%20Quero%20pedir%20um%20Temaki%20de%20Salmão."
+                            target="_blank">
+                            Pedir
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?auto=format&fit=crop&w=800&q=80"
+                        alt="Temaki">
+                </div>
+
+                <div class="food-info">
+
+                    <h3>Temaki Especial</h3>
+
+                    <p>
+                        Salmão, cream cheese e cebolinha.
+                    </p>
+
+                    <div class="food-bottom">
+                        <span class="price">R$ 32,90</span>
+
+                        <a
+                            class="order-button"
+                            href="https://wa.me/5500000000000?text=Olá!%20Quero%20pedir%20um%20Temaki%20Especial."
+                            target="_blank">
+                            Pedir
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=800&q=80"
+                        alt="Temaki">
+                </div>
+
+                <div class="food-info">
+
+                    <h3>Temaki Hot</h3>
+
+                    <p>
+                        Salmão empanado, arroz e molho especial.
+                    </p>
+
+                    <div class="food-bottom">
+                        <span class="price">R$ 31,90</span>
+
+                        <a
+                            class="order-button"
+                            href="https://wa.me/5500000000000?text=Olá!%20Quero%20pedir%20um%20Temaki%20Hot."
+                            target="_blank">
+                            Pedir
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SASHIMI -->
+
+        <h3 class="category-title">
+            🐟 <span>Sashimi</span>
+        </h3>
+
+        <div class="menu-grid">
+
+            <div class="food-card">
+
+                <div class="food-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1534482421-64566f976cfa?auto=format&fit=crop&w=800&q=80"
+                        alt="Sashimi de salmão">
+                </div>
+
+                <div class="food-info">
+
+                    <h3>Sashimi de Salmão</h3>
+
+                    <p>
+                        Fatias selecionadas de salmão fresco.
+                    </p>
+
+                    <div class="food-bottom">
+                        <span class="price">R$ 42,90</span>
+
+                        <a
+                            class="order-button"
+                            href="https://wa.me/5500000000000?text=Olá!%20Quero%20pedir%20Sashimi%20de%20Salmão."
+                            target="_blank">
+                            Pedir
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=80"
+                        alt="Sashimi">
+                </div>
+
+                <div class="food-info">
+
+                    <h3>Sashimi Especial</h3>
+
+                    <p>
+                        Seleção de peixes frescos.
+                    </p>
+
+                    <div class="food-bottom">
+                        <span class="price">R$ 54,90</span>
+
+                        <a
+                            class="order-button"
+                            href="https://wa.me/5500000000000?text=Olá!%20Quero%20pedir%20o%20Sashimi%20Especial."
+                            target="_blank">
+                            Pedir
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SOBRE
+    ========================== -->
+
+    <section id="sobre">
+
+        <div class="about">
+
+            <div class="about-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1000&q=85"
+                    alt="Restaurante japonês">
+
+            </div>
+
+            <div class="about-text">
+
+                <small>NOSSA HISTÓRIA</small>
+
+                <h2>
+                    Tradição japonesa<br>
+                    em cada detalhe.
+                </h2>
+
+                <p>
+                    No Sakura Sushi, acreditamos que uma boa refeição
+                    começa com ingredientes de qualidade e termina com
+                    uma experiência inesquecível.
+                </p>
+
+                <p>
+                    Nossa equipe prepara cada prato com cuidado,
+                    buscando combinar a tradição da culinária japonesa
+                    com um toque moderno.
+                </p>
+
+
+                <div class="features">
+
+                    <div class="feature">
+                        <strong>🍣 Ingredientes frescos</strong>
+                        <span>Selecionados diariamente.</span>
+                    </div>
+
+                    <div class="feature">
+                        <strong>👨‍🍳 Chef especializado</strong>
+                        <span>Experiência e dedicação.</span>
+                    </div>
+
+                    <div class="feature">
+                        <strong>🥢 Feito na hora</strong>
+                        <span>Preparado especialmente para você.</span>
+                    </div>
+
+                    <div class="feature">
+                        <strong>❤️ Atendimento</strong>
+                        <span>Uma experiência especial.</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         AVALIAÇÕES
+    ========================== -->
+
+    <section id="avaliacoes">
+
+        <div class="section-title">
+
+            <small>CLIENTES</small>
+
+            <h2>
+                O que nossos <span>clientes dizem</span>
+            </h2>
+
+        </div>
+
+
+        <div class="reviews">
+
+            <div class="review">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "Comida excelente e muito bem preparada.
+                    O sushi estava fresco e o atendimento foi ótimo!"
+                </p>
+
+                <strong>— Ana Martins</strong>
+
+            </div>
+
+
+            <div class="review">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "Um dos melhores restaurantes japoneses que já
+                    conheci. O combinado estava perfeito."
+                </p>
+
+                <strong>— Lucas Ferreira</strong>
+
+            </div>
+
+
+            <div class="review">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "Ambiente bonito, comida deliciosa e preços
+                    justos. Com certeza vou voltar!"
+                </p>
+
+                <strong>— Mariana Silva</strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTATO
+    ========================== -->
+
+    <section class="contact" id="contato">
+
+        <div class="section-title">
+
+            <small>FALE CONOSCO</small>
+
+            <h2>
+                Faça seu <span>pedido</span>
+            </h2>
+
+        </div>
+
+
+        <div class="contact-box">
+
+            <h2>
+                Venha conhecer o Sakura Sushi 🍣
+            </h2>
+
+            <p>
+                Faça sua reserva ou peça pelo WhatsApp.
+            </p>
+
+
+            <div class="contact-info">
+
+                <div class="contact-item">
+
+                    <strong>📍 Endereço</strong>
+
+                    <span>
+                        Rua Exemplo, 123<br>
+                        Centro - Sua Cidade
+                    </span>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <strong>🕐 Horário</strong>
+
+                    <span>
+                        Terça a Domingo<br>
+                        18:00 às 23:00
+                    </span>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <strong>📞 Telefone</strong>
+
+                    <span>
+                        (49) 99999-9999
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- TROQUE O NÚMERO PELO WHATSAPP REAL -->
+
+            <a
+                href="https://wa.me/5500000000000?text=Olá!%20Gostaria%20de%20fazer%20um%20pedido."
+                target="_blank"
+                class="button">
+
+                Pedir pelo WhatsApp
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         RODAPÉ
+    ========================== -->
+
+    <footer>
+
+        <div class="footer-logo">
+            Sakura<span>Sushi</span>
+        </div>
+
+        <p>
+            © 2026 Sakura Sushi — Restaurante Japonês.
+        </p>
+
+        <p>
+            Feito com ❤️ e muito sushi.
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         WHATSAPP FLUTUANTE
+    ========================== -->
+
+    <!-- TROQUE 5500000000000 PELO SEU NÚMERO -->
+
+    <a
+        class="whatsapp"
+        href="https://wa.me/5500000000000?text=Olá!%20Gostaria%20de%20fazer%20um%20pedido."
+        target="_blank"
+        aria-label="Falar pelo WhatsApp">
+
+        ☎
+
+    </a>
 
 </body>
 </html>
+```
